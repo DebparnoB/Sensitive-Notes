@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="apple-touch-icon" sizes="76x76" href="source/assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="source/assets/img/favicon.png">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
+  <title>
+    Sensative Notepad
+  </title>
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
+  <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+  <!-- Nucleo Icons -->
+  <link href="source/assets/css/nucleo-icons.css" rel="stylesheet" />
+  <!-- CSS Files -->
+  <link href="source/assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="source/assets/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
+  <!-- CSS Just for demo purpose, don't include it in your project -->
+  <link href="source/assets/demo/demo.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+  <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+        <style id="compiled-css" type="text/css">
+
+			.chartWrapper {/* w w w. j a v  a2 s.co  m*/
+			   position: relative;
+			}
+			.chartWrapper > canvas {
+			   position: absolute;
+			   left: 0;
+			   top: 0;
+			   pointer-events:none;
+			}
+			.chartAreaWrapper {
+			   width: 600px;
+			   overflow-x: scroll;
+			}
+
+
+      </style> 
+</head>
+
+<body class=" ">
+  <div class="wrapper " >
+    <div class="sidebar">
+      <!--
+        Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
+    -->
+      <div class="sidebar-wrapper">
+        <div class="logo">
+          <a href="http://www.creative-tim.com" class="simple-text logo-mini">
+            DB
+          </a>
+          <a href="http://www.creative-tim.com" class="simple-text logo-normal">
+            Sensative Notepad
+          </a>
+        </div>
+        <ul class="nav">
+          <li class="active ">
+            <a href="#">
+              <i class="tim-icons icon-chart-pie-36"></i>
+              <p>Dashboard</p>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="tim-icons icon-atom"></i>
+              <p>App Info</p>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="tim-icons icon-single-02"></i>
+              <p>Creator</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="main-panel">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-absolute " id="colorDet" style="transition: background-color 4s;">
+        <div class="container-fluid">
+          <div class="navbar-wrapper">
+            <div class="navbar-toggle d-inline">
+              <button type="button" class="navbar-toggler">
+                <span class="navbar-toggler-bar bar1"></span>
+                <span class="navbar-toggler-bar bar2"></span>
+                <span class="navbar-toggler-bar bar3"></span>
+              </button>
+            </div>
+            <span class="navbar-brand colorChanger" id="emotionField" style="font-size:20px;">Let's Get Started...</span>
+          </div>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-bar navbar-kebab"></span>
+            <span class="navbar-toggler-bar navbar-kebab"></span>
+            <span class="navbar-toggler-bar navbar-kebab"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navigation">
+            <ul class="navbar-nav ml-auto ">
+              <div class="search-bar input-group">
+                <a href="https://www.facebook.com/siddhart.ghosh.75/" target="_blank" class="btn btn-link"><i class="tim-icons icon-single-02 colorChanger"></i></a>
+				<a href="https://debparnob.github.io/debparna_biswas/" target="_blank" class="btn btn-link"><i class="tim-icons icon-world colorChanger"></i></a>
+              </div>    
+              
+              
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="SEARCH">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <i class="tim-icons icon-simple-remove"></i>
+              </button>
+            </div>
+            <div class="modal-footer">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Navbar -->
+      <div class="content">
+        <div class="row">
+		
+		  <div class="col-lg-6">
+            <div class="card card-chart" style="background-color: #27293d; box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.50);">
+              <div class="card-header ">
+                <h5 class="card-category" style="color:white">Text Area</h5>
+              </div>
+              <div class="card-body ">
+                <div class="chart-area" style="height:230px">
+				 <textarea id="userText"style="position:absolute;left:2.5%;right:2.5%;width:95%;height:78%;"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+		  
+          <div class="col-lg-3">
+            <div class="card card-chart" style="background-color: #27293d; box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.50);">
+              <div class="card-header">
+                <h5 class="card-category" style="color:#33cc33;">HAPPINESS</h5>
+                <h3 class="card-title"><span style="font-size:25px">&#128518;&nbsp;</span><span style="color:white" id="happyVal">0</span></h3>
+              </div>
+              <div class="card-body">
+                <div class="chart-area"  style="height:180px">
+                  <canvas id="chartHappy"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <div class="card card-chart" style="background-color: #27293d; box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.50);">
+              <div class="card-header ">
+                <h5 class="card-category" style="color:#6699ff;">SADNESS</h5>
+                <h3 class="card-title" ><span style="font-size:25px">&#128545;&nbsp;</span><span style="color:white" id="sadVal">0</span></h3>
+              </div>
+              <div class="card-body ">
+                <div class="chart-area" style="height:180px">
+                  <canvas id="chartSad"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+		  
+		  <div class="col-lg-3">
+            <div class="card card-chart" style="background-color: #27293d; box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.50);">
+              <div class="card-header ">
+                <h5 class="card-category" style="color:#ff471a;">ANGER</h5>
+                <h3 class="card-title"><span style="font-size:25px">&#128544;&nbsp;</span><span style="color:white" id="angerVal">0</span></h3>
+              </div>
+              <div class="card-body ">
+                <div class="chart-area" style="height:180px">
+                  <canvas id="chartAnger"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+		  
+		  <div class="col-lg-3">
+            <div class="card card-chart" style="background-color: #27293d; box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.50);">
+              <div class="card-header ">
+                <h5 class="card-category" style="color:#aa80ff;">HATRED</h5>
+                <h3 class="card-title"><span style="font-size:25px">&#128550;&nbsp;</span><span style="color:white" id="hateVal">0</span></h3>
+              </div>
+              <div class="card-body ">
+                <div class="chart-area" style="height:180px">
+                  <canvas id="chartHate"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+		  
+		  
+		  
+		  <div class="col-lg-3">
+            <div class="card card-chart" style="background-color: #27293d; box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.50);">
+              <div class="card-header ">
+                <h5 class="card-category" style="color:white;">NEUTRAL</h5>
+                <h3 class="card-title"><span style="font-size:25px">&#128529;&nbsp;</span><span style="color:white" id="neutralVal">100</span></h3>
+              </div>
+              <div class="card-body ">
+                <div class="chart-area" style="height:180px">
+                  <canvas id="chartNeutral"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        
+      </div>
+      </div>
+    </div>
+    <div class="fixed-plugin">
+      <div class="dropdown show-dropdown">
+        <a href="#" data-toggle="dropdown">
+          <i class="fa fa-cog fa-2x"> </i>
+        </a>
+        <ul class="dropdown-menu" style="padding-bottom:15px">
+          <li class="header-title"> Sidebar Background</li>
+          <li class="adjustments-line">
+            <a href="javascript:void(0)" class="switch-trigger background-color">
+              <div class="badge-colors text-center">
+                <span class="badge filter badge-primary active" data-color="primary"></span>
+                <span class="badge filter badge-blue" data-color="blue"></span>
+                <span class="badge filter badge-green" data-color="green"></span>
+              </div>
+              <div class="clearfix"></div>
+            </a>
+          </li>
+          <li class="adjustments-line text-center color-change">
+            <span class="color-label">LIGHT MODE</span>
+            <span class="badge light-badge mr-2"></span>
+            <span class="badge dark-badge ml-2"></span>
+            <span class="color-label">DARK MODE</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!--   Core JS Files   -->
+    <script src="source/assets/js/core/jquery.min.js"></script>
+    <script src="source/assets/js/core/popper.min.js"></script>
+    <script src="source/assets/js/core/bootstrap.min.js"></script>
+    <script src="source/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+    <!--  Google Maps Plugin    -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+    <!-- Chart JS -->
+    <script src="source/assets/js/plugins/chartjs.min.js"></script>
+    <!--  Notifications Plugin    -->
+    <script src="source/assets/js/plugins/bootstrap-notify.js"></script>
+    <!-- Control Center for Black Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="source/assets/js/black-dashboard.min.js?v=1.0.0" type="text/javascript"></script>
+    <!-- Black Dashboard DEMO methods, don't include it in your project! -->
+    <script src="source/assets/demo/demo.js"></script>
+    
+    <script>
+	//var gradientChartOptionsConfigurationWithTooltipPurple;
+	if (window.location.protocol.indexOf('https') == 0){
+	  var el = document.createElement('meta')
+	  el.setAttribute('http-equiv', 'Content-Security-Policy')
+	  el.setAttribute('content', 'upgrade-insecure-requests')
+	  document.head.append(el)
+	}
+	
+	function pushData(){
+		addData(myChart1, 7, 30);
+	}
+	
+	var value1,value2,value3,value4,value5;
+	var Yaxes = 0;
+	var max=0; var color=''; 
+	var colIdx=0;
+	
+	function updateData(data){
+		Yaxes+=1;max=0;color='';colIdx=-1;value=0;
+		var list = data.split(",");
+		//alert(list);
+		value1 = (parseFloat(list[0])*100).toFixed(1);
+		//alert(value1);
+		addData(myChart5, Yaxes, value1);
+		if(value1>max){
+			max=value1;
+			color='NEUTRAL';colIdx=0;
+		}		
+		//alert(max);
+		$("#neutralVal").html(value1);
+		value2 = (parseFloat(list[1])*100).toFixed(1);
+		//alert(value2);
+		addData(myChart1, Yaxes, value2);
+		if(value2>max){
+			max=value2;
+			color='HAPPY';colIdx=1;
+		}		
+		//alert(max);
+		$("#happyVal").html(value2);
+		value3 = (parseFloat(list[2])*100).toFixed(1);
+		//alert(value3);
+		addData(myChart2, Yaxes, value3);
+		if(value3>max){
+			max=value3;
+			color='SAD';colIdx=2;
+		}		
+		//alert(max);
+		$("#sadVal").html(value3);
+		value4 = (parseFloat(list[3])*100).toFixed(1);
+		//alert(value4);
+		addData(myChart4, Yaxes, value4);
+		if(value4>max){
+			max=value4;
+			color='HATE';colIdx=3;
+		}		
+		//alert(max);
+		$("#hateVal").html(value4);
+		value5 = (parseFloat(list[4])*100).toFixed(1);
+		//alert(value5);
+		addData(myChart3, Yaxes, value5);
+		if(value5>max){
+			max=value5;
+			color='ANGRY';colIdx=4;
+		}	
+		//alert(max);
+		//alert(max+" "+color);
+		$("#angerVal").html(value5);		
+		$("#emotionField").html(color);
+		//background-color:red;
+		
+		//alert(colorArray[colIdx][3]);
+		changeBackGColor(max, colIdx);
+	}
+	
+	//Neutral, Happy, Sad, Hatred, Anger
+	var colorArray = [["#d9d9d9","#cccccc","#b3b3b3","#a6a6a6"],
+					["#66ffb3","#33ff99","#00e673","#00cc66"],
+					["#b3ccff","#99bbff","#80aaff","#4d88ff"],
+					["#d9b3ff","#bf80ff","#b366ff","#9933ff"],
+					["#ffb3b3","#ff8080","#ff4d4d","#ff1a1a"]];
+	
+	function changeBackGColor(max, colIdx) {
+		//var clss = color;
+		if(max<=100 && max>75){	
+			$("#colorDet").css("background-color",colorArray[colIdx][3]);
+			$(".colorChanger").css("color","#27293d");
+		} else if(max<=75 && max>50){
+			$("#colorDet").css("background-color",colorArray[colIdx][2]);
+			$(".colorChanger").css("color","#27293d");
+		} else if(max<=50 && max>25){
+			$("#colorDet").css("background-color",colorArray[colIdx][1]);
+			$(".colorChanger").css("color","#27293d");
+		} else if(max<=25 && max>=0){
+			$("#colorDet").css("background-color",colorArray[colIdx][0]);
+		}
+		//$("colorDet").css("background-color","red");
+	}
+	
+      $(document).ready(function() {
+	    //$("body").addClass('white-content');
+	  
+		var txtlength;var arr;var compText;
+	  
+		//Neutral, Happy, Sad, Hatred, Anger
+		$('#userText').bind('keypress', function(e) {
+			if(e.keyCode==44 || e.keyCode==46){
+				arr = $('#userText').val().split('.')
+				txtlength = arr.length;
+				arr = arr[txtlength-1].split(',');
+				txtlength = arr.length;
+				compText=arr[txtlength-1].trim();
+				if(compText!=''){
+				//alert("start");
+				$.ajax({
+				  data : {
+							firstName : compText,
+						 },
+					 type : 'POST',
+					 url : 'http://ec2-18-191-175-12.us-east-2.compute.amazonaws.com:8080/process'				 
+					}).done(function(data) {
+						  updateData(data);
+					  });
+				}
+			}
+		});
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+/////////////////////////GRADIENT////////////////////////////
+		gradientChartOptionsConfigurationWithTooltip = {
+				  maintainAspectRatio: false,
+				  legend: {
+					display: false
+				  },
+
+				  tooltips: {
+					backgroundColor: '#f5f5f5',
+					titleFontColor: '#333',
+					bodyFontColor: '#666',
+					bodySpacing: 4,
+					xPadding: 12,
+					mode: "nearest",
+					intersect: 0,
+					position: "nearest"
+				  },
+				  responsive: true,
+				  scales: {
+					yAxes: [{
+					  barPercentage: 1.6,
+					  gridLines: {
+						drawBorder: false,
+						color: 'rgba(29,140,248,0.0)',
+						zeroLineColor: "transparent",
+					  },
+					  ticks: {
+						suggestedMin: 0,
+						suggestedMax: 100,
+						padding: 20,
+						fontColor: "#9a9a9a"
+					  }
+					}],
+
+					xAxes: [{
+					  barPercentage: 1.6,
+					  gridLines: {
+						drawBorder: false,
+						color: 'rgba(225,78,202,0.1)',
+						zeroLineColor: "transparent",
+					  },
+					  ticks: {
+						padding: 20,
+						fontColor: "#9a9a9a"
+					  }
+					}]
+				  }
+				};
+
+//////////////////////////////////GREEN////////////////////////////////////
+				var ctx2 = document.getElementById("chartHappy").getContext("2d");	
+				var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
+				
+				var data = {
+				  labels: [0],
+				  datasets: [{
+					label: "Data",
+					fill: true,
+					backgroundColor: gradientStroke2,
+					borderColor: '#33cc33',
+					borderWidth: 2,
+					borderDash: [],
+					borderDashOffset: 0.0,
+					pointBackgroundColor: '#33cc33',
+					pointBorderColor: 'rgba(255,255,255,0)',
+					pointHoverBackgroundColor: '#33cc33',
+					pointBorderWidth: 20,
+					pointHoverRadius: 4,
+					pointHoverBorderWidth: 15,
+					pointRadius: 4,
+					data: [0],
+				  }]
+				};
+				
+
+				myChart1 = new Chart(ctx2, {
+				  type: 'line',
+				  data: data,
+				  options: gradientChartOptionsConfigurationWithTooltip
+				});
+
+				
+				
+//////////////////////////////////BLUE////////////////////////////////////
+				var ctx1 = document.getElementById("chartSad").getContext("2d");	
+				var gradientStroke1 = ctx1.createLinearGradient(0, 230, 0, 50);
+				
+				var data = {
+				  labels: [0],
+				  datasets: [{
+					label: "Data",
+					fill: true,
+					backgroundColor: gradientStroke1,
+					borderColor: '#6699ff',
+					borderWidth: 2,
+					borderDash: [],
+					borderDashOffset: 0.0,
+					pointBackgroundColor: '#6699ff',
+					pointBorderColor: 'rgba(255,255,255,0)',
+					pointHoverBackgroundColor: '#6699ff',
+					pointBorderWidth: 20,
+					pointHoverRadius: 4,
+					pointHoverBorderWidth: 15,
+					pointRadius: 4,
+					data: [0],
+				  }]
+				};
+				
+
+				myChart2 = new Chart(ctx1, {
+				  type: 'line',
+				  data: data,
+				  options: gradientChartOptionsConfigurationWithTooltip
+				});
+				
+//////////////////////////////////RED////////////////////////////////////
+				var ctx3 = document.getElementById("chartAnger").getContext("2d");	
+				var gradientStroke3 = ctx3.createLinearGradient(0, 230, 0, 50);
+				
+				var data = {
+				  labels: [0],
+				  datasets: [{
+					label: "Data",
+					fill: true,
+					backgroundColor: gradientStroke3,
+					borderColor: '#ff471a',
+					borderWidth: 2,
+					borderDash: [],
+					borderDashOffset: 0.0,
+					pointBackgroundColor: '#ff471a',
+					pointBorderColor: 'rgba(255,255,255,0)',
+					pointHoverBackgroundColor: '#ff471a',
+					pointBorderWidth: 20,
+					pointHoverRadius: 4,
+					pointHoverBorderWidth: 15,
+					pointRadius: 4,
+					data: [0],
+				  }]
+				};
+				
+
+				myChart3 = new Chart(ctx3, {
+				  type: 'line',
+				  data: data,
+				  options: gradientChartOptionsConfigurationWithTooltip
+				});
+				
+	  
+//////////////////////////////////VIOLET////////////////////////////////////
+				var ctx4 = document.getElementById("chartHate").getContext("2d");	
+				var gradientStroke4 = ctx4.createLinearGradient(0, 230, 0, 50);
+				
+				var data = {
+				  labels: [0],
+				  datasets: [{
+					label: "Data",
+					fill: true,
+					backgroundColor: gradientStroke4,
+					borderColor: '#aa80ff',
+					borderWidth: 2,
+					borderDash: [],
+					borderDashOffset: 0.0,
+					pointBackgroundColor: '#aa80ff',
+					pointBorderColor: 'rgba(255,255,255,0)',
+					pointHoverBackgroundColor: '#aa80ff',
+					pointBorderWidth: 20,
+					pointHoverRadius: 4,
+					pointHoverBorderWidth: 15,
+					pointRadius: 4,
+					data: [0],
+				  }]
+				};
+				
+
+				myChart4 = new Chart(ctx4, {
+				  type: 'line',
+				  data: data,
+				  options: gradientChartOptionsConfigurationWithTooltip
+				});
+				
+//////////////////////////////////WHITE////////////////////////////////////
+				var ctx5 = document.getElementById("chartNeutral").getContext("2d");	
+				var gradientStroke5 = ctx5.createLinearGradient(0, 230, 0, 50);
+				
+				var data = {
+				  labels: [0],
+				  datasets: [{
+					label: "Data",
+					fill: true,
+					backgroundColor: gradientStroke5,
+					borderColor: 'white',
+					borderWidth: 2,
+					borderDash: [],
+					borderDashOffset: 0.0,
+					pointBackgroundColor: 'white',
+					pointBorderColor: 'rgba(255,255,255,0)',
+					pointHoverBackgroundColor: 'white',
+					pointBorderWidth: 20,
+					pointHoverRadius: 4,
+					pointHoverBorderWidth: 15,
+					pointRadius: 4,
+					data: [100],
+				  }]
+				};
+				
+
+				myChart5 = new Chart(ctx5, {
+				  type: 'line',
+				  data: data,
+				  options: gradientChartOptionsConfigurationWithTooltip
+				});
+				
+
+	  });
+	  
+	  function addData(chart, label, data) {
+			chart.data.labels.push(label);
+			chart.data.datasets.forEach((dataset) => {
+				dataset.data.push(data);
+			});
+			chart.update();
+		}
+	
+    </script>
+	
+	<script>
+		
+      $(document).ready(function() {
+        $().ready(function() {
+          $sidebar = $('.sidebar');
+          $navbar = $('.navbar');
+
+          $full_page = $('.full-page');
+
+          $sidebar_responsive =null;
+          sidebar_mini_active = true;
+          white_color = false;
+
+          window_width = $(window).width();
+
+          fixed_plugin_open = $('.sidebar .sidebar-wrapper .nav li.active a p').html();
+
+
+
+          $('.fixed-plugin a').click(function(event) {
+            // Alex if we click on switch, stop propagation of the event, so the dropdown will not be hide, otherwise we set the  section active
+            if ($(this).hasClass('switch-trigger')) {
+              if (event.stopPropagation) {
+                event.stopPropagation();
+              } else if (window.event) {
+                window.event.cancelBubble = true;
+              }
+            }
+          });
+
+          $('.fixed-plugin .background-color span').click(function() {
+            $(this).siblings().removeClass('active');
+            $(this).addClass('active');
+
+            var new_color = $(this).data('color');
+
+            if ($sidebar.length != 0) {
+              $sidebar.attr('data-color', new_color);
+            }
+
+            if ($navbar.length != 0) {
+              $navbar.attr('data-color', new_color);
+            }
+
+            if ($full_page.length != 0) {
+              $full_page.attr('filter-color', new_color);
+            }
+
+            if ($sidebar_responsive.length != 0) {
+              $sidebar_responsive.attr('data-color', new_color);
+            }
+          });
+
+          $('.switch-sidebar-mini input').on("switchChange.bootstrapSwitch", function() {
+            var $btn = $(this);
+
+            if (sidebar_mini_active == true) {
+              //$('body').removeClass('sidebar-mini');
+              sidebar_mini_active = false;
+              blackDashboard.showSidebarMessage('Sidebar mini deactivated...');
+            } else {
+              //$('body').addClass('sidebar-mini');
+              sidebar_mini_active = true;
+              blackDashboard.showSidebarMessage('Sidebar mini activated...');
+            }
+
+            // we simulate the window Resize so the charts will get updated in realtime.
+            var simulateWindowResize = setInterval(function() {
+              window.dispatchEvent(new Event('resize'));
+            }, 180);
+
+            // we stop the simulation of Window Resize after the animations are completed
+            setTimeout(function() {
+              clearInterval(simulateWindowResize);
+            }, 1000);
+          });
+
+          $('.switch-change-color input').on("switchChange.bootstrapSwitch", function() {
+            var $btn = $(this);
+
+            if (white_color == true) {
+
+              //$('body').addClass('change-background');
+              setTimeout(function() {
+                //$('body').removeClass('change-background');
+                //$('body').removeClass('white-content');
+              }, 900);
+              white_color = false;
+            } else {
+
+              //$('body').addClass('change-background');
+              setTimeout(function() {
+                //$('body').removeClass('change-background');
+                //$('body').addClass('white-content');
+              }, 900);
+
+              white_color = true;
+            }
+
+
+          });
+
+          $('.light-badge').click(function() {
+            $('body').addClass('white-content');
+          });
+
+          $('.dark-badge').click(function() {
+            $('body').removeClass('white-content');
+          });
+        });
+      });
+    </script>
+</body>
+
+</html>
