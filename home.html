@@ -362,6 +362,10 @@
 	    //$("body").addClass('white-content');
 	  
 		var txtlength;var arr;var compText;
+	      
+	      	$( '#userText' ).on( 'input', function() {
+		    alert("this");
+		} );
 	  
 		//Neutral, Happy, Sad, Hatred, Anger
 		$('#userText').bind('keypress', function(e) {
