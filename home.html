@@ -379,14 +379,34 @@
 		var txtlength;var arr;var compText;
 	      
 	      	if(detectMob()){
+			var keyMob; var checkDup='';
 			$( '#userText' ).on( 'input', function(e) {
-				alert(this.value.slice(-1));
+				keyMob = this.value.slice(-1);
+				//checkDupS= this.value.slice(-4);
+				if(keyMob=='.' || keyMob==',' ){
+					if(this.value.slice(-4) != checkDup){
+						checkDup = this.value.slice(-4);
+						//alert(checkDup);
+						arr = this.value.slice(0,-1).split('.');
+						//alert(arr);
+						txtlength = arr.length;
+						arr = arr[txtlength-1].split(',');
+						txtlength = arr.length;
+						compText=arr[txtlength-1].trim();
+						//alert(compText);
+						if(compText!=''){
+						//alert("start");
+						$.ajax({
+							 type : 'GET',
+							 url : 'https://emotion-spring-api.herokuapp.com/springEmoApi?text='+compText ,			 
+							}).done(function(data) {
+								  updateData(data);
+							  });
+						}
+					}
+				}
 			});
 		}
-	      
-	      	$('#userText').keypress(function() {
-		  alert('Handler for .keypress() called.');
-		});
 
 		//Neutral, Happy, Sad, Hatred, Anger
 		$('#userText').bind('keypress', function(e) {
