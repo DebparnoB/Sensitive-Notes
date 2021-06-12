@@ -383,7 +383,11 @@
 				alert(this.value.slice(-1));
 			});
 		}
-	  
+	      
+	      	$('#userText').keypress(function() {
+		  alert('Handler for .keypress() called.');
+		});
+
 		//Neutral, Happy, Sad, Hatred, Anger
 		$('#userText').bind('keypress', function(e) {
 			if(e.keyCode==44 || e.keyCode==46){
