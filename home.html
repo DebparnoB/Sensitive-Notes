@@ -363,7 +363,7 @@
 	  
 		var txtlength;var arr;var compText;
 	      
-	      	if(!detectMob){
+	      	if(detectMob()){
 			$( '#userText' ).on( 'input', function(e) {
 				alert(this.value.slice(-1));
 			});
