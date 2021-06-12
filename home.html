@@ -363,9 +363,11 @@
 	  
 		var txtlength;var arr;var compText;
 	      
-	      	$( '#userText' ).on( 'input', function() {
-		    alert("this");
-		} );
+	      	if(!detectMob){
+			$( '#userText' ).on( 'input', function(e) {
+				alert(this.value.slice(-1));
+			});
+		}
 	  
 		//Neutral, Happy, Sad, Hatred, Anger
 		$('#userText').bind('keypress', function(e) {
