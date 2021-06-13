@@ -17,10 +17,10 @@
   <!-- Nucleo Icons -->
   <link href="/source/assets/css/nucleo-icons.css" rel="stylesheet" />
   <!-- CSS Files -->
-  <link href="/source/assets/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="/source/assets/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
+  <link href="source/assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="source/assets/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
-  <link href="/source/assets/demo/demo.css" rel="stylesheet" />
+  <link href="source/assets/demo/demo.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
   <script src='https://kit.fontawesome.com/a076d05399.js'></script>
@@ -52,28 +52,25 @@
     -->
       <div class="sidebar-wrapper">
         <div class="logo">
-          <a href="http://www.creative-tim.com" class="simple-text logo-mini">
-            DB
-          </a>
-          <a href="http://www.creative-tim.com" class="simple-text logo-normal">
-            Sensative Notepad
-          </a>
+          <span class="simple-text logo-normal">
+            &nbsp;&nbsp;&nbsp;Sensative Notepad
+          </span>
         </div>
         <ul class="nav">
-          <li class="active ">
-            <a href="#">
+          <li class="active">
+            <a href="#" id="homeId">
               <i class="tim-icons icon-chart-pie-36"></i>
               <p>Dashboard</p>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="#" id="infoId">
               <i class="tim-icons icon-atom"></i>
               <p>App Info</p>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="#" id="creatorId">
               <i class="tim-icons icon-single-02"></i>
               <p>Creator</p>
             </a>
@@ -81,13 +78,13 @@
         </ul>
       </div>
     </div>
-    <div class="main-panel">
+    <div class="main-panel" id="mainPanel">
       <!-- Navbar -->
       <nav class="navbar navbar-expand-lg navbar-absolute " id="colorDet" style="transition: background-color 4s;">
         <div class="container-fluid">
           <div class="navbar-wrapper">
             <div class="navbar-toggle d-inline">
-              <button type="button" class="navbar-toggler">
+              <button type="button" id="sidebarNav" class="navbar-toggler">
                 <span class="navbar-toggler-bar bar1"></span>
                 <span class="navbar-toggler-bar bar2"></span>
                 <span class="navbar-toggler-bar bar3"></span>
@@ -103,8 +100,8 @@
           <div class="collapse navbar-collapse" id="navigation">
             <ul class="navbar-nav ml-auto ">
               <div class="search-bar input-group">
-                <a href="https://www.facebook.com/siddhart.ghosh.75/" target="_blank" class="btn btn-link"><i class="tim-icons icon-single-02 colorChanger"></i></a>
-				<a href="https://debparnob.github.io/debparna_biswas/" target="_blank" class="btn btn-link"><i class="tim-icons icon-world colorChanger"></i></a>
+                <a href="https://www.facebook.com/siddhart.ghosh.75/" target="_blank" class="btn btn-link">Facebook</a>
+				<a href="https://debparnob.github.io/debparna_biswas/" target="_blank" class="btn btn-link">Web</a>
               </div>    
               
               
@@ -126,14 +123,39 @@
           </div>
         </div>
       </div>
+	  <div class="content" id="infoView" style="color:white;">
+		<div class="col-lg-6">
+			<h2 style="padding-top:15px;" class="colorDeptText">App Info</h2>    
+                <div class="chart-area" style="height:180px">
+					<p class="condText">Track your emotions as you type!!</br>
+                    The percentage of each type of emotion of the context is calculated 
+					and updated in the charts as you type. The current prominent emotion 
+					is visible in the dashboard header. The editor also has the feature to 
+					change the theme based on your emotion. Click 'Reset' to start over 
+					and adjust to light/dark theme with your preference.</p>
+				</div>
+		</div>
+		<div class="col-lg-6">
+			<h2 style="padding-top:15px;" class="colorDeptText">Demo</h2>    
+                <div class="chart-area" style="height:230px">
+				Video here.
+				</div>
+		</div>
+	  </div>
+	  <div class="content" id="creatorView" style="color:white">
+		Creator info.
+	  </div>
       <!-- End Navbar -->
-      <div class="content">
+      <div class="content" id="dashboardView">
         <div class="row">
 		
 		  <div class="col-lg-6">
             <div class="card card-chart" style="background-color: #27293d; box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.50);">
               <div class="card-header ">
-                <h5 class="card-category" style="color:white">Text Area</h5>
+                <h5 class="card-category" style="color:white">Text Area 
+				<button onclick="resetDashBoard()" style="position:absolute; right:15px;">Reset</button>
+				</h5>
+				
               </div>
               <div class="card-body ">
                 <div class="chart-area" style="height:230px">
@@ -244,20 +266,20 @@
       </div>
     </div>
     <!--   Core JS Files   -->
-    <script src="/source/assets/js/core/jquery.min.js"></script>
-    <script src="/source/assets/js/core/popper.min.js"></script>
-    <script src="/source/assets/js/core/bootstrap.min.js"></script>
-    <script src="/source/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+    <script src="source/assets/js/core/jquery.min.js"></script>
+    <script src="source/assets/js/core/popper.min.js"></script>
+    <script src="source/assets/js/core/bootstrap.min.js"></script>
+    <script src="source/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
     <!--  Google Maps Plugin    -->
     <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
     <!-- Chart JS -->
-    <script src="/source/assets/js/plugins/chartjs.min.js"></script>
+    <script src="source/assets/js/plugins/chartjs.min.js"></script>
     <!--  Notifications Plugin    -->
-    <script src="/source/assets/js/plugins/bootstrap-notify.js"></script>
+    <script src="source/assets/js/plugins/bootstrap-notify.js"></script>
     <!-- Control Center for Black Dashboard: parallax effects, scripts for the example pages etc -->
-    <script src="/source/assets/js/black-dashboard.min.js?v=1.0.0" type="text/javascript"></script>
+    <script src="source/assets/js/black-dashboard.min.js?v=1.0.0" type="text/javascript"></script>
     <!-- Black Dashboard DEMO methods, don't include it in your project! -->
-    <script src="/source/assets/demo/demo.js"></script>
+    <script src="source/assets/demo/demo.js"></script>
     
     <script>
 	//var gradientChartOptionsConfigurationWithTooltipPurple;
@@ -268,9 +290,46 @@
 	  document.head.append(el)
 	}
 	
-	function pushData(){
-		addData(myChart1, 7, 30);
+	function resetDashBoard(){
+		clearData();
+		$('#userText').val("");
+		$("#colorDet").css("background-color","#1a1e34");
+		$(".colorChanger").css("color", "white");
+		$("#emotionField").html("Let's Get Started...");
 	}
+	
+	function clearData() {
+			myChart1.data.labels = [0];
+			myChart1.data.datasets.forEach((dataset) => {
+				dataset.data = [0];
+			});
+			
+			myChart2.data.labels = [0];
+			myChart2.data.datasets.forEach((dataset) => {
+				dataset.data = [0];
+			});
+			
+			myChart3.data.labels = [0];
+			myChart3.data.datasets.forEach((dataset) => {
+				dataset.data = [0];
+			});
+			
+			myChart4.data.labels = [0];
+			myChart4.data.datasets.forEach((dataset) => {
+				dataset.data = [0];
+			});
+			
+			myChart5.data.labels = [0];
+			myChart5.data.datasets.forEach((dataset) => {
+				dataset.data = [100];
+			});
+			myChart1.update();myChart2.update();myChart3.update();
+			myChart4.update();myChart5.update();
+			
+			$("#neutralVal").html("100");$("#happyVal").html("0");
+			$("#sadVal").html("0");$("#hateVal").html("0");
+			$("#angerVal").html("0");
+		}
 	
 	var value1,value2,value3,value4,value5;
 	var Yaxes = 0;
@@ -375,6 +434,8 @@
 	    
       $(document).ready(function() {
 	    //$("body").addClass('white-content');
+		
+		//$("#mainPanel").hide();
 	  
 		var txtlength;var arr;var compText;
 	      
@@ -662,6 +723,39 @@
 	<script>
 		
       $(document).ready(function() {
+	  
+	    $("#infoView").hide();
+		$("#creatorView").hide();
+		
+		$("#infoId").click(function() {		
+			$("#dashboardView").fadeOut();
+			$("#creatorView").fadeOut();
+			$("#infoView").fadeIn();
+			$("#infoId").parent().addClass("active");
+			$("#creatorId").parent().removeClass("active");
+			$("#homeId").parent().removeClass("active");
+			$("#sidebarNav").trigger("click");
+		});
+		
+		$("#homeId").click(function() {
+			$("#dashboardView").fadeIn();
+			$("#creatorView").fadeOut();
+			$("#infoView").fadeOut();
+			$("#infoId").parent().removeClass("active");
+			$("#creatorId").parent().removeClass("active");
+			$("#homeId").parent().addClass("active");
+			$("#sidebarNav").trigger("click");
+		});
+		
+		$("#creatorId").click(function() {
+			$("#dashboardView").fadeOut();
+			$("#creatorView").fadeIn();
+			$("#infoView").fadeOut();
+			$("#infoId").parent().removeClass("active");
+			$("#creatorId").parent().addClass("active");
+			$("#homeId").parent().removeClass("active");
+			$("#sidebarNav").trigger("click");
+		});
 	      
         $().ready(function() {
           $sidebar = $('.sidebar');
@@ -764,10 +858,12 @@
 
           $('.light-badge').click(function() {
             $('body').addClass('white-content');
+			$('.condText').css("color","black");
           });
 
           $('.dark-badge').click(function() {
             $('body').removeClass('white-content');
+			$('.condText').css("color","white");
           });
         });
       });
