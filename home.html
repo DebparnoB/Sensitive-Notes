@@ -19,6 +19,7 @@
   <!-- CSS Files -->
   <link href="source/assets/css/bootstrap.min.css" rel="stylesheet" />
   <link href="source/assets/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="source/assets/demo/demo.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -77,6 +78,16 @@
 			  margin: 0;
 			  opacity: 1;
 			  transition: 0s;
+			}
+			
+			.containerbackground {
+				margin: 3rem;
+				position: absolute;
+				top: 35%;
+				left: 93px;
+				bottom: 0;
+				z-index: -1;
+				color: grey;
 			}
 
 
@@ -175,10 +186,20 @@
 				</h5>
 				
               </div>
-              <div class="card-body ">
-                <div class="chart-area" style="height:230px">
-				 <textarea id="userText"style="position:absolute;left:2.5%;right:2.5%;width:95%;height:78%;"></textarea>
+              <div class="card-body " style="text-align:center;">
+                <div class="chart-area" id="textCont" style="height:230px; transition: height 300ms;">
+				 <textarea id="userText"
+				 style="position:absolute;left:2.5%;right:2.5%;width:95%;height:76%;
+				 transition: height 300ms;
+				 "></textarea>
+				 
+				 <a href="#" id="textExpander"><i class="fa fa-caret-down notForMob" 
+				 style="color:#7575a3; font-size:27px;position:absolute;bottom:1px;"></i></a>
+				 
+				 <a href="#" style="display:none" id="textCollapser"><i class="fa fa-caret-up notForMob" 
+				 style="color:#7575a3; font-size:27px;position:absolute;bottom:1px;"></i></a>
                 </div>
+				
               </div>
             </div>
           </div>
@@ -271,7 +292,10 @@
 		<div class="col-lg-6">
 			<h2 class="colorDeptText">Demonstration</h2>  
                 <div style="border-color:white">
-					<iframe id="demoVid" style="border: 2px grey dashed;" title="The art of labeling"
+					<div class="containerbackground">
+						Loading...
+					</div>
+					<iframe id="demoVid" allow="fullscreen;" style="border: 2px grey dashed;" title="The art of labeling"
 					    src="">
 					</iframe>
 				</div>
@@ -284,8 +308,8 @@
     </div>
     <div class="fixed-plugin">
       <div class="dropdown show-dropdown">
-        <a href="#" data-toggle="dropdown">
-          <i class="fa fa-cog fa-2x"> </i>
+        <a href="#" data-toggle="dropdown"> 
+          <i id="settingsIcon"  style="" class="fa fa-cog fa-2x"> </i>
         </a>
         <ul class="dropdown-menu" style="padding-bottom:15px">
           <li class="header-title"> Sidebar Background</li>
@@ -325,13 +349,6 @@
     <script src="source/assets/demo/demo.js"></script>
     
     <script>
-	//var gradientChartOptionsConfigurationWithTooltipPurple;
-	if (window.location.protocol.indexOf('https') == 0){
-	  var el = document.createElement('meta')
-	  el.setAttribute('http-equiv', 'Content-Security-Policy')
-	  el.setAttribute('content', 'upgrade-insecure-requests')
-	  document.head.append(el)
-	}
 	
 	function resetDashBoard(){
 		clearData();
@@ -515,9 +532,13 @@
 		if(!detectMob()){
 			$("#demoVid").attr("height","326");
 			$("#demoVid").attr("width","580");
+			
 		} else {
 			$("#demoVid").attr("height","185");
-			$("#demoVid").attr("width","328");
+			$("#demoVid").attr("width","328");			
+			$(".notForMob").hide();
+			$("#settingsIcon").removeClass("fa-2x");
+			$("#settingsIcon").addClass("fa-1x");
 		}
 
 		//Neutral, Happy, Sad, Hatred, Anger
@@ -758,6 +779,20 @@
 				  options: gradientChartOptionsConfigurationWithTooltip
 				});
 				
+				
+		$("#textExpander").click(function(){
+			$("#textCont").css("height","570px");
+			$("#userText").css("height", "88.5%");
+			$(this).hide();
+			$("#textCollapser").show();
+		});	
+
+		$("#textCollapser").click(function(){
+			$("#textCont").css("height","230px");
+			$("#userText").css("height", "76%");
+			$(this).hide();
+			$("#textExpander").show();
+		});	
 
 	  });
 	  
@@ -786,7 +821,7 @@
 			$("#creatorId").parent().removeClass("active");
 			$("#homeId").parent().removeClass("active");
 			$("#sidebarNav").trigger("click");
-			$("#demoVid").attr("src","https://www.youtube.com/embed/HuIBH1E2-dk?autoplay=1&mute=1&rel=0&modestbranding=0");
+			$("#demoVid").attr("src","https://www.youtube.com/embed/-z-Bq5IWqio?autoplay=1&mute=1&rel=0&modestbranding=0");
 		});
 		
 		$("#homeId").click(function() {
