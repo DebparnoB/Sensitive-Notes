@@ -39,6 +39,45 @@
 			   width: 600px;
 			   overflow-x: scroll;
 			}
+			
+			.resetButton {
+			  position: absolute;
+			  right: 17px;
+			  background-color: #5c5c8a;
+			  border: none;
+			  font-size: 13px;
+			  color: #FFFFFF;
+			  padding: 3px;
+			  width: 70px;
+			  height:30px;
+			  text-align: center;
+			  -webkit-transition-duration: 0.4s; /* Safari */
+			  transition-duration: 0.4s;
+			  text-decoration: none;
+			  overflow: hidden;
+			  cursor: pointer;
+			  focus {outline:0;}
+			}
+
+			.resetButton:after {
+			  content: "";
+			  background: #7575a3;
+			  display: block;
+			  position: absolute;
+			  padding-top: 300%;
+			  padding-left: 350%;
+			  margin-left: -20px!important;
+			  margin-top: -120%;
+			  opacity: 0;
+			  transition: all 0.8s;
+			}
+
+			.resetButton:active:after {
+			  padding: 0;
+			  margin: 0;
+			  opacity: 1;
+			  transition: 0s;
+			}
 
 
       </style> 
@@ -123,28 +162,6 @@
           </div>
         </div>
       </div>
-	  <div class="content" id="infoView" style="color:white;">
-		<div class="col-lg-6">
-			<h2 style="padding-top:15px;" class="colorDeptText">App Info</h2>    
-                <div class="chart-area" style="height:180px">
-					<p class="condText">Track your emotions as you type!!</br>
-                    The percentage of each type of emotion of the context is calculated 
-					and updated in the charts as you type. The current prominent emotion 
-					is visible in the dashboard header. The editor also has the feature to 
-					change the theme based on your emotion. Click 'Reset' to start over 
-					and adjust to light/dark theme with your preference.</p>
-				</div>
-		</div>
-		<div class="col-lg-6">
-			<h2 style="padding-top:15px;" class="colorDeptText">Demo</h2>    
-                <div class="chart-area" style="height:230px">
-				Video here.
-				</div>
-		</div>
-	  </div>
-	  <div class="content" id="creatorView" style="color:white">
-		Creator info.
-	  </div>
       <!-- End Navbar -->
       <div class="content" id="dashboardView">
         <div class="row">
@@ -153,7 +170,8 @@
             <div class="card card-chart" style="background-color: #27293d; box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.50);">
               <div class="card-header ">
                 <h5 class="card-category" style="color:white">Text Area 
-				<button onclick="resetDashBoard()" style="position:absolute; right:15px;">Reset</button>
+				<!--<button  style="position:absolute; right:15px;">Reset</button>-->
+				<button class="resetButton" onclick="resetDashBoard()">Reset</button>
 				</h5>
 				
               </div>
@@ -238,6 +256,31 @@
         
       </div>
       </div>
+	  
+	  <div class="content" id="infoView" style="color:white;">
+		<div class="col-lg-6">
+			<h2 style="padding-top:15px;" class="colorDeptText">App Info</h2>    
+                <div class="chart-area" style="height:170px">
+					<p class="condText">Track your emotions as you type !!</br>
+                    The percentage of each type of emotion of the context is calculated 
+					and updated in the charts as you type. The current prominent emotion 
+					is visible in the dashboard header and the mood-color changes accordingly. 
+					Click 'Reset' to start over.
+				</div>
+		</div>
+		<div class="col-lg-6">
+			<h2 class="colorDeptText">Demonstration</h2>  
+                <div style="border-color:white">
+					<iframe id="demoVid" style="border: 2px grey dashed;" title="The art of labeling"
+					    src="">
+					</iframe>
+				</div>
+		</div>
+	  </div>
+	  <div class="content" id="creatorView" style="color:white">
+		Creator info.
+	  </div>
+	  
     </div>
     <div class="fixed-plugin">
       <div class="dropdown show-dropdown">
@@ -467,6 +510,14 @@
 					}
 				}
 			});
+		}
+		
+		if(!detectMob()){
+			$("#demoVid").attr("height","326");
+			$("#demoVid").attr("width","580");
+		} else {
+			$("#demoVid").attr("height","185");
+			$("#demoVid").attr("width","328");
 		}
 
 		//Neutral, Happy, Sad, Hatred, Anger
@@ -735,6 +786,7 @@
 			$("#creatorId").parent().removeClass("active");
 			$("#homeId").parent().removeClass("active");
 			$("#sidebarNav").trigger("click");
+			$("#demoVid").attr("src","https://www.youtube.com/embed/HuIBH1E2-dk?autoplay=1&mute=1&rel=0&modestbranding=0");
 		});
 		
 		$("#homeId").click(function() {
@@ -745,6 +797,7 @@
 			$("#creatorId").parent().removeClass("active");
 			$("#homeId").parent().addClass("active");
 			$("#sidebarNav").trigger("click");
+			$("#demoVid").attr("src","");
 		});
 		
 		$("#creatorId").click(function() {
@@ -755,6 +808,7 @@
 			$("#creatorId").parent().addClass("active");
 			$("#homeId").parent().removeClass("active");
 			$("#sidebarNav").trigger("click");
+			$("#demoVid").attr("src","");
 		});
 	      
         $().ready(function() {
