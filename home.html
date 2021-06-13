@@ -395,6 +395,7 @@
 	var Yaxes = 0;
 	var max=0; var color=''; 
 	var colIdx=0;
+	var firstReq = 1;
 	
 	function updateData(data){
 		Yaxes+=1;max=0;color='';colIdx=-1;value=0;
@@ -544,6 +545,10 @@
 		//Neutral, Happy, Sad, Hatred, Anger
 		$('#userText').bind('keypress', function(e) {
 			if(e.keyCode==44 || e.keyCode==46){
+				if(firstReq==1){
+					$("#emotionField").html("Activating Env...");
+					firstReq=0;
+				}
 				arr = $('#userText').val().split('.')
 				txtlength = arr.length;
 				arr = arr[txtlength-1].split(',');
