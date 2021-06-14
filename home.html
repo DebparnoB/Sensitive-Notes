@@ -292,6 +292,21 @@
               </div>
             </div>
           </div>
+		  
+		  <div class="col-lg-3">
+            <div class="card card-chart" style="background-color: #27293d; box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.50);">
+              
+              <div class="card-body ">
+                <div class="chart-header" style="height:140px">
+					<button style="width:90%;position:absolute;left:5%;" class="resetButton" onclick="computeAsWhole()">Compute as Whole</button><br>
+					<p style="color:white;position:absolute;top:50px;padding:12px;font-size:12px;">
+						Paste your text in the text-box and press 'Compute as whole' to check full emotion variance of the paragraph.</br>
+						</br><span id="compErrorMesg" style="color:red; font-size:13px; display:none">Enter valid input</span>
+					</p>
+                </div>
+              </div>
+            </div>
+          </div>
         
       </div>
       </div>
@@ -380,12 +395,104 @@
     
     <script>
 	
+	function findAverage(arr) {
+		var i=0;var total=0;
+		for(i=0;i<arr.length;i++){
+			total = total + parseFloat(arr[i]);
+		}
+		return (total/arr.length).toFixed(1);
+	}
+	
+	function updateDataByArr(xArr, yArr) {
+			var i;
+	        for(i=1;i<yArr;i++){
+				addData(myChart1, i, xArr[1][i]);
+				addData(myChart2, i, xArr[2][i]);
+			
+				addData(myChart3, i, xArr[4][i]);
+			
+				addData(myChart4, i, xArr[3][i]);
+			
+				addData(myChart5, i, xArr[0][i]);
+			}
+			myChart1.update();myChart2.update();myChart3.update();
+			myChart4.update();myChart5.update();	
+					
+			$("#neutralVal").html("<span style='font-size:13px'>Average </span>&nbsp;"+findAverage(xArr[0]));
+			$("#happyVal").html("<span style='font-size:13px'>Average </span>&nbsp;"+findAverage(xArr[1]));
+			$("#sadVal").html("<span style='font-size:13px'>Average </span>&nbsp;"+findAverage(xArr[2]));
+			$("#hateVal").html("<span style='font-size:13px'>Average </span>&nbsp;"+findAverage(xArr[3]));
+			$("#angerVal").html("<span style='font-size:13px'>Average </span>&nbsp;"+findAverage(xArr[4]));
+		}
+	
+	function computeAsWhole() {		
+		var arrDot = [];
+		var arrCom=[];
+		var arrSentParts=[];var resultArr = [[0],[0],[0],[0],[0]];
+		if($('#userText').val().trim()!= ''){
+			$("#compErrorMesg").hide();
+			arrDot=$('#userText').val().split('.');
+			for (const x of arrDot) {
+				arrCom = x.split(',');
+				for(const y of arrCom) {
+					if(y.trim()!=''){
+						arrSentParts.push(y.trim());
+					}
+				}
+			}
+			//alert(arrSentParts);
+			var k=0;var len = arrSentParts.length;
+			if(len !=0){
+				clearData();
+				$("#emotionField")
+				.html("<span style='animation: animate 1.2s linear infinite;'>Computing...</span>");
+				$("#compErrorMesg").hide();
+			} else {
+				$("#compErrorMesg").show();
+			}
+			for(const txt of arrSentParts){
+				$.ajax({
+				 type : 'GET',
+				 url : 'https://emotion-spring-api.herokuapp.com/springEmoApi?text='+txt ,			 
+				}).done(function(data) {
+					   arrDot = data.split(",");
+					   resultArr[0].push((parseFloat(arrDot[0])*100).toFixed(1));
+					   resultArr[1].push((parseFloat(arrDot[1])*100).toFixed(1));
+					   resultArr[2].push((parseFloat(arrDot[2])*100).toFixed(1));
+					   resultArr[3].push((parseFloat(arrDot[3])*100).toFixed(1));
+					   resultArr[4].push((parseFloat(arrDot[4])*100).toFixed(1));
+					   k=k+1;
+					   if(k==len){
+							Yaxes = len;
+							updateComputeAsWhole(resultArr,arrSentParts.length);
+					   }
+				  });
+			}
+		} else{
+			$("#compErrorMesg").show();
+		}
+	  }
+	  
+	  function updateComputeAsWhole(resultArr,len){
+			console.log(resultArr);
+			var arrDot=[];var i;
+			for( i=0;i<=len;i++){
+				arrDot.push(parseInt(i));
+			}
+			updateDataByArr(resultArr,arrDot.length);			
+			$("#colorDet").css("background-color","#1a1e34");
+			$(".colorChanger").css("color", "white");
+			$("#emotionField").html("Your result is ready !!");
+	  }
+	
 	function resetDashBoard(){
+		Yaxes=0;
 		clearData();
 		$('#userText').val("");
 		$("#colorDet").css("background-color","#1a1e34");
 		$(".colorChanger").css("color", "white");
 		$("#emotionField").html("Let's Get Started...");
+		$("#compErrorMesg").hide();
 	}
 	
 	function clearData() {
@@ -522,6 +629,8 @@
 			return false;
 		    }
 	    }
+		
+
 	    
       $(document).ready(function() {
 	    //$("body").addClass('white-content');
@@ -537,11 +646,7 @@
 				//checkDupS= this.value.slice(-4);
 				if(keyMob=='.' || keyMob==',' ){
 					if(this.value.slice(-4) != checkDup){					
-						if(firstReq==1){
-							$("#emotionField")
-							.html("<span style='animation: animate 1.2s linear infinite;'>Activating Env...</span>");
-							firstReq=0;
-						}
+						
 						checkDup = this.value.slice(-4);
 						//alert(checkDup);
 						arr = this.value.slice(0,-1).split('.');
@@ -552,6 +657,12 @@
 						compText=arr[txtlength-1].trim();
 						//alert(compText);
 						if(compText!=''){
+							if(firstReq==1){
+								$("#emotionField")
+								.html("<span style='animation: animate 1.2s linear infinite;'>Activating Env...</span>");
+								firstReq=0;
+							}
+						$("#compErrorMesg").hide();
 						//alert("start");
 						$.ajax({
 							 type : 'GET',
@@ -582,24 +693,27 @@
 		//Neutral, Happy, Sad, Hatred, Anger
 		$('#userText').bind('keypress', function(e) {
 			if(e.keyCode==44 || e.keyCode==46){
-				if(firstReq==1){
-					$("#emotionField")
-					.html("<span style='animation: animate 1.2s linear infinite;'>Activating Env...</span>");
-					firstReq=0;
-				}
 				arr = $('#userText').val().split('.')
 				txtlength = arr.length;
 				arr = arr[txtlength-1].split(',');
 				txtlength = arr.length;
 				compText=arr[txtlength-1].trim();
 				if(compText!=''){
+					if(firstReq==1){						
+						$("#emotionField")
+						.html("<span style='animation: animate 1.2s linear infinite;'>Activating Env...</span>");
+						firstReq=0;
+					}
+					$("#compErrorMesg").hide();
 				//alert("start");
 				$.ajax({
 					 type : 'GET',
 					 url : 'https://emotion-spring-api.herokuapp.com/springEmoApi?text='+compText ,			 
 					}).done(function(data) {
 						  updateData(data);
-					  });
+					  }).error(function(){
+						alert("errppp");
+					  });;
 				}
 			}
 		});
