@@ -8,7 +8,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
   <title>
-    Sensative Notepad
+    Sensitive Notepad
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
@@ -102,8 +102,9 @@
     -->
       <div class="sidebar-wrapper">
         <div class="logo">
-          <span class="simple-text logo-normal">
-            &nbsp;&nbsp;&nbsp;Sensative Notepad
+          <span class="simple-text logo-normal">            
+			<image src="source/assets/img/favicon.png" style="height:28px;width:28px;"> </image>
+			&nbsp;Sensitive Notepad
           </span>
         </div>
         <ul class="nav">
@@ -122,7 +123,7 @@
           <li>
             <a href="#" id="creatorId">
               <i class="tim-icons icon-single-02"></i>
-              <p>Creator</p>
+              <p>Creators</p>
             </a>
           </li>
         </ul>
@@ -130,7 +131,7 @@
     </div>
     <div class="main-panel" id="mainPanel">
       <!-- Navbar -->
-      <nav class="navbar navbar-expand-lg navbar-absolute " id="colorDet" style="transition: background-color 4s;">
+      <nav class="navbar navbar-expand-lg navbar-absolute " id="colorDet" style="background-color:#1a1e34 ;transition: background-color 4s;">
         <div class="container-fluid">
           <div class="navbar-wrapper">
             <div class="navbar-toggle d-inline">
@@ -181,7 +182,6 @@
             <div class="card card-chart" style="background-color: #27293d; box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.50);">
               <div class="card-header ">
                 <h5 class="card-category" style="color:white">Text Area 
-				<!--<button  style="position:absolute; right:15px;">Reset</button>-->
 				<button class="resetButton" onclick="resetDashBoard()">Reset</button>
 				</h5>
 				
@@ -222,7 +222,7 @@
             <div class="card card-chart" style="background-color: #27293d; box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.50);">
               <div class="card-header ">
                 <h5 class="card-category" style="color:#6699ff;">SADNESS</h5>
-                <h3 class="card-title" ><span style="font-size:25px">&#128545;&nbsp;</span><span style="color:white" id="sadVal">0</span></h3>
+                <h3 class="card-title" ><span id="sadMob" style="font-size:25px">&#128545;&nbsp;</span><span style="color:white" id="sadVal">0</span></h3>
               </div>
               <div class="card-body ">
                 <div class="chart-area" style="height:180px">
@@ -250,7 +250,7 @@
             <div class="card card-chart" style="background-color: #27293d; box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.50);">
               <div class="card-header ">
                 <h5 class="card-category" style="color:#aa80ff;">HATRED</h5>
-                <h3 class="card-title"><span style="font-size:25px">&#128550;&nbsp;</span><span style="color:white" id="hateVal">0</span></h3>
+                <h3 class="card-title"><span id="hateMob" style="font-size:25px">&#128550;&nbsp;</span><span style="color:white" id="hateVal">0</span></h3>
               </div>
               <div class="card-body ">
                 <div class="chart-area" style="height:180px">
@@ -297,13 +297,25 @@
 						Loading...
 					</div>
 					<iframe id="demoVid" allow="fullscreen;" style="border: 2px grey dashed;" title="The art of labeling"
-					    src="">
+					    src="https://www.youtube.com/embed/-z-Bq5IWqio?autoplay=1&mute=1&rel=0&modestbranding=0" rel="preload">
 					</iframe>
 				</div>
 		</div>
 	  </div>
 	  <div class="content" id="creatorView" style="color:white">
-		Creator info.
+		<div class="col-lg-6" style="margin-bottom:30px;">
+		<image src="source/assets/img/me.jpg" style="height:200px;width:200px;"></image>
+			<p style="padding-top:15px;font-size:20px;" class="colorDeptText">Debparna Biswas</p>                 
+			<p style="font-size:15px;" class="condText">Developer at T.C.S.</p>
+			<a href="https://www.linkedin.com/in/debparna-biswas-3286451a6/" target="_blank"
+			style="font-size:12px;">Connect&nbsp;<span style='font-size:15px;'>&#8599;</span></a>
+		</div>
+		<div class="col-lg-6" >
+		<image src="source/assets/img/sayan.jpg" style="height:200px;width:200px;"></image>
+			<p style="padding-top:15px;font-size:20px;" class="colorDeptText">Mayukh Ray</p>                 
+			<p style="font-size:15px;" class="condText">BTech pursuer at I.E.M.</p>
+			<a href="#" style="font-size:12px;">Connect&nbsp;<span style='font-size:15px;'>&#8599;</span></a>
+		</div>
 	  </div>
 	  
     </div>
@@ -541,6 +553,8 @@
 			$(".notForMob").hide();
 			$("#settingsIcon").removeClass("fa-2x");
 			$("#settingsIcon").addClass("fa-1x");
+			$("#sadMob").html("&#128550;&nbsp;");
+			$("#hateMob").html("&#128545;&nbsp;");
 		}
 
 		//Neutral, Happy, Sad, Hatred, Anger
@@ -819,7 +833,8 @@
 	    $("#infoView").hide();
 		$("#creatorView").hide();
 		
-		$("#infoId").click(function() {		
+		$("#infoId").click(function(event) {	
+			event.preventDefault();
 			$("#dashboardView").fadeOut();
 			$("#creatorView").fadeOut();
 			$("#infoView").fadeIn();
@@ -827,10 +842,10 @@
 			$("#creatorId").parent().removeClass("active");
 			$("#homeId").parent().removeClass("active");
 			$("#sidebarNav").trigger("click");
-			$("#demoVid").attr("src","https://www.youtube.com/embed/-z-Bq5IWqio?autoplay=1&mute=1&rel=0&modestbranding=0");
 		});
 		
-		$("#homeId").click(function() {
+		$("#homeId").click(function(event) {
+			event.preventDefault();
 			$("#dashboardView").fadeIn();
 			$("#creatorView").fadeOut();
 			$("#infoView").fadeOut();
@@ -838,10 +853,10 @@
 			$("#creatorId").parent().removeClass("active");
 			$("#homeId").parent().addClass("active");
 			$("#sidebarNav").trigger("click");
-			$("#demoVid").attr("src","");
 		});
 		
-		$("#creatorId").click(function() {
+		$("#creatorId").click(function(event) {
+			event.preventDefault();
 			$("#dashboardView").fadeOut();
 			$("#creatorView").fadeIn();
 			$("#infoView").fadeOut();
@@ -849,7 +864,6 @@
 			$("#creatorId").parent().addClass("active");
 			$("#homeId").parent().removeClass("active");
 			$("#sidebarNav").trigger("click");
-			$("#demoVid").attr("src","");
 		});
 	      
         $().ready(function() {

@@ -148,9 +148,9 @@ $(window).resize(function() {
     $navbar = $('.navbar');
     isExpanded = $('.navbar').find('[data-toggle="collapse"]').attr("aria-expanded");
     if ($navbar.hasClass('bg-white') && $(window).width() > 991) {
-      $navbar.removeClass('bg-white').addClass('navbar-transparent');
+      //$navbar.removeClass('bg-white').addClass('navbar-transparent');
     } else if ($navbar.hasClass('navbar-transparent') && $(window).width() < 991 && isExpanded != "false") {
-      $navbar.addClass('bg-white').removeClass('navbar-transparent');
+      //$navbar.addClass('bg-white').removeClass('navbar-transparent');
     }
   }
 });
