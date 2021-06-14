@@ -302,6 +302,8 @@
 					<p style="color:white;position:absolute;top:50px;padding:12px;font-size:12px;">
 						Paste your text in the text-box and press 'Compute as whole' to check full emotion variance of the paragraph.</br>
 						</br><span id="compErrorMesg" style="color:red; font-size:13px; display:none">Enter valid input</span>
+						<span id="compProcssMesg" style='font-size:13px; color:white;display:none;
+						animation: animate 1.2s linear infinite;'>&nbsp;Computing...</span>
 					</p>
                 </div>
               </div>
@@ -446,7 +448,9 @@
 				clearData();
 				$("#emotionField")
 				.html("<span style='animation: animate 1.2s linear infinite;'>Computing...</span>");
+				
 				$("#compErrorMesg").hide();
+				$("#compProcssMesg").show();
 			} else {
 				$("#compErrorMesg").show();
 			}
@@ -465,6 +469,7 @@
 					   if(k==len){
 							Yaxes = len;
 							updateComputeAsWhole(resultArr,arrSentParts.length);
+							$("#compProcssMesg").hide();
 					   }
 				  });
 			}
