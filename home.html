@@ -427,13 +427,16 @@
 			$("#angerVal").html("<span style='font-size:13px'>Average </span>&nbsp;"+findAverage(xArr[4]));
 		}
 	
+	var userTextVarComp='';	
 	function computeAsWhole() {		
 		var arrDot = [];
 		var arrCom=[];
 		var arrSentParts=[];var resultArr = [[0],[0],[0],[0],[0]];
-		if($('#userText').val().trim()!= ''){
+		userTextVarComp = $('#userText').val();
+		userTextVarComp = userTextVarComp.replace(/[&\/\\#+()$~%'":*?<>{}]/g,'');
+		if(userTextVarComp.trim()!= ''){
 			$("#compErrorMesg").hide();
-			arrDot=$('#userText').val().split('.');
+			arrDot=userTextVarComp.split('.');
 			for (const x of arrDot) {
 				arrCom = x.split(',');
 				for(const y of arrCom) {
@@ -644,6 +647,7 @@
 	  
 		var txtlength;var arr;var compText;
 	      
+			var userTextVarMob='';
 	      	if(detectMob()){
 			var keyMob; var checkDup='';
 			$( '#userText' ).on( 'input', function(e) {
@@ -654,13 +658,16 @@
 						
 						checkDup = this.value.slice(-4);
 						//alert(checkDup);
-						arr = this.value.slice(0,-1).split('.');
+						userTextVarMob = this.value.replace(/[&\/\\#+()$~%'":*?<>{}]/g,'');
+						userTextVarMob = userTextVarMob.slice(0,-1);
+						//alert(userTextVarMob);
+						arr = userTextVarMob.split('.');
 						//alert(arr);
 						txtlength = arr.length;
 						arr = arr[txtlength-1].split(',');
 						txtlength = arr.length;
 						compText=arr[txtlength-1].trim();
-						//alert(compText);
+						alert(compText);
 						if(compText!=''){
 							if(firstReq==1){
 								$("#emotionField")
@@ -695,10 +702,13 @@
 			$("#hateMob").html("&#128545;&nbsp;");
 		}
 
+		var userTextVar='';
 		//Neutral, Happy, Sad, Hatred, Anger
 		$('#userText').bind('keypress', function(e) {
 			if(e.keyCode==44 || e.keyCode==46){
-				arr = $('#userText').val().split('.')
+				userTextVar = $('#userText').val();
+				userTextVar = userTextVar.replace(/[&\/\\#+()$~%'":*?<>{}]/g,'');
+				arr = userTextVar.split('.')
 				txtlength = arr.length;
 				arr = arr[txtlength-1].split(',');
 				txtlength = arr.length;
