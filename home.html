@@ -89,6 +89,18 @@
 				z-index: -1;
 				color: grey;
 			}
+			
+			@keyframes animate{
+   0%{
+     opacity: 0;
+   }
+   50%{
+     opacity: 0.7;
+   }
+   100%{
+     opacity: 0;
+   }
+ }
 
 
       </style> 
@@ -561,7 +573,8 @@
 		$('#userText').bind('keypress', function(e) {
 			if(e.keyCode==44 || e.keyCode==46){
 				if(firstReq==1){
-					$("#emotionField").html("Activating Env...");
+					$("#emotionField")
+					.html("<span style='animation: animate 1.2s linear infinite;'>Activating Env...</span>");
 					firstReq=0;
 				}
 				arr = $('#userText').val().split('.')
