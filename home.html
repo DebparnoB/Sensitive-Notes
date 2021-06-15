@@ -664,9 +664,9 @@
 				keyMob = this.value.slice(-1);
 				//checkDupS= this.value.slice(-4);
 				if(keyMob=='.' || keyMob==',' || keyMob=='?' || keyMob=='!' ){
-					if(this.value.slice(-4) != checkDup){					
+					if(this.value.slice(-6) != checkDup){					
 						
-						checkDup = this.value.slice(-4);
+						checkDup = this.value.slice(-6);
 						//alert(checkDup);
 						userTextVarMob = this.value.replace(/[&\/\\#+()$~%'":*<>{}]/g,'');
 						userTextVarMob = this.value.replace('?','.');
