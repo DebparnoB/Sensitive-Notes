@@ -18,14 +18,15 @@
   <link href="/source/assets/css/nucleo-icons.css" rel="stylesheet" />
   <!-- CSS Files -->
   <link href="source/assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="source/assets/css/kendo.common.min.css" />
   <link href="source/assets/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="source/assets/demo/demo.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-  <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-        <style id="compiled-css" type="text/css">
+  <script src='https://kit.fontawesome.com/a076d05399.js'></script><style id="compiled-css" type="text/css">
+
 
 			.chartWrapper {/* w w w. j a v  a2 s.co  m*/
 			   position: relative;
@@ -157,7 +158,7 @@
             </div>
             <span class="navbar-brand colorChanger" id="emotionField" style="font-size:20px;">Let's Get Started...</span>
           </div>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+          <button class="navbar-toggler collapsed" type="button" id="dropButton" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
             <span class="navbar-toggler-bar navbar-kebab"></span>
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -204,7 +205,7 @@
               <div class="card-body " style="text-align:center;">
                 <div class="chart-area" id="textCont" style="height:230px; transition: height 300ms;">
 				
-				 <textarea id="userText"
+				 <textarea id="userText"  name="userText"
 				 style="position:absolute;left:2.5%;right:2.5%;width:95%;height:76%;padding:5px;
 				 transition: height 300ms;" placeholder="Start typing here..."
 				 ></textarea>
@@ -311,7 +312,7 @@
               
               <div class="card-body"  style="height:50px;">
                 <p style="color:#7575a3;font-weight:regular;text-align:center;padding:0px;font-size:13px;">
-					&#169;&nbsp;Copyright - Debparna Biswas</p>
+					&#169;&nbsp;Debparna Biswas</p>
               </div>
             </div>
           </div>
@@ -401,7 +402,7 @@
     <!-- Black Dashboard DEMO methods, don't include it in your project! -->
     <script src="source/assets/demo/demo.js"></script>
     
-    <script>
+    <script>	
 	
 	function findAverage(arr) {
 		var i=0;var total=0;
@@ -490,7 +491,7 @@
 	  }
 	  
 	  function updateComputeAsWhole(resultArr,len){
-			console.log(resultArr);
+			//console.log(resultArr);
 			var arrDot=[];var i;
 			for( i=0;i<=len;i++){
 				arrDot.push(parseInt(i));
@@ -750,15 +751,23 @@
 					 url : 'https://emotion-spring-api.herokuapp.com/springEmoApi?text='+compText ,			 
 					}).done(function(data) {
 						  updateData(data);
-					  }).error(function(){
-						alert("errppp");
-					  });;
+					  });
 				}
 			}
 		});
-	  
-	  
-	  
+		
+		$(document).mouseup(function(e) 
+		{		
+			if(!($("#dropButton").hasClass("collapsed"))){
+				var container = $(".navbar");
+			// if the target of the click isn't the container nor a descendant of the container
+				if (!container.is(e.target) && container.has(e.target).length === 0) 
+				{
+					$("#dropButton").trigger("click");
+				}
+			}
+		});
+		  
 	  
 	  
 	  
@@ -1151,6 +1160,7 @@
 			$('.condText').css("color","white");
           });
         });
+		
       });
     </script>
 </body>
