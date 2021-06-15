@@ -439,6 +439,8 @@
 		var arrCom=[];
 		var arrSentParts=[];var resultArr = [[0],[0],[0],[0],[0]];
 		userTextVarComp = $('#userText').val();
+		userTextVarComp = userTextVarComp.replace('?','.');
+		userTextVarComp = userTextVarComp.replace('!','.');
 		userTextVarComp = userTextVarComp.replace(/[&\/\\#+()$~%'":*?<>{}]/g,'');
 		if(userTextVarComp.trim()!= ''){
 			$("#compErrorMesg").hide();
@@ -659,19 +661,23 @@
 			$( '#userText' ).on( 'input', function(e) {
 				keyMob = this.value.slice(-1);
 				//checkDupS= this.value.slice(-4);
-				if(keyMob=='.' || keyMob==',' ){
+				if(keyMob=='.' || keyMob==',' || keyMob=='?' || keyMob=='!'){
 					if(this.value.slice(-4) != checkDup){					
 						
 						checkDup = this.value.slice(-4);
 						//alert(checkDup);
-						userTextVarMob = this.value.replace(/[&\/\\#+()$~%'":*?<>{}]/g,'');
-						userTextVarMob = userTextVarMob.slice(0,-1);
+						userTextVarMob = this.value.replace(/[&\/\\#+()$~%'":*<>{}]/g,'');
+						//userTextVarMob = userTextVarMob.slice(0,-1);
 						//alert(userTextVarMob);
 						arr = userTextVarMob.split('.');
-						//alert(arr);
 						txtlength = arr.length;
 						arr = arr[txtlength-1].split(',');
 						txtlength = arr.length;
+						arr = arr[txtlength-1].split('!');
+						txtlength = arr.length;
+						arr = arr[txtlength-1].split('?');
+						txtlength = arr.length;
+						arr = arr.filter(e =>  e);
 						compText=arr[txtlength-1].trim();
 						//alert(compText);
 						if(compText!=''){
@@ -682,6 +688,11 @@
 							}
 						$("#compErrorMesg").hide();
 						//alert("start");
+						if(keyMob=='?'){
+							compText=compText+"?";
+						} else if(keyMob=='!') {
+							compText=compText+"!";
+						}
 						$.ajax({
 							 type : 'GET',
 							 url : 'https://emotion-spring-api.herokuapp.com/springEmoApi?text='+compText ,			 
@@ -712,14 +723,25 @@
 		var userTextVar='';
 		//Neutral, Happy, Sad, Hatred, Anger
 		$('#userText').bind('keypress', function(e) {
-			if(e.keyCode==44 || e.keyCode==46){
+			//alert(e.keyCode);
+			if(e.keyCode==44 || e.keyCode==46 || e.keyCode==63 || e.keyCode==33){
 				userTextVar = $('#userText').val();
 				userTextVar = userTextVar.replace(/[&\/\\#+()$~%'":*?<>{}]/g,'');
 				arr = userTextVar.split('.')
 				txtlength = arr.length;
 				arr = arr[txtlength-1].split(',');
 				txtlength = arr.length;
+				arr = arr[txtlength-1].split('!');
+				txtlength = arr.length;
+				arr = arr[txtlength-1].split('?');
+				txtlength = arr.length;
+				arr = arr.filter(e =>  e);
 				compText=arr[txtlength-1].trim();
+				if(e.keyCode==63){
+					compText=compText+"?";
+				} else if(e.keyCode==33) {
+					compText=compText+"!";
+				}
 				if(compText!=''){
 					if(firstReq==1){						
 						$("#emotionField")
