@@ -140,9 +140,7 @@
               <p>Creators</p>
             </a>
           </li>
-        </ul>
-		<p style=" font-size:10px;position:absolute; top:640px; color:white;">
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#169;&nbsp;Copyright - Debparna Biswas</p>
+        </ul>		
       </div>
     </div>
     <div class="main-panel" id="mainPanel">
@@ -167,9 +165,9 @@
           <div class="collapse navbar-collapse" id="navigation">
             <ul class="navbar-nav ml-auto ">
               <div class="search-bar input-group">
-                <a href="https://www.facebook.com/siddhart.ghosh.75/" target="_blank" class="btn btn-link">Facebook</a>
-                <a href="https://www.instagram.com/dark._.sorcerer/" target="_blank" class="btn btn-link">Instagram</a>
-				<a href="https://debparnob.github.io/debparna_biswas/" target="_blank" class="btn btn-link">Web</a>
+                <a href="https://github.com/DebparnoB" target="_blank" style="color:#6600cc;" class="btn btn-link">Git Us</a>
+				<a href="https://debparnob.github.io/debparna_biswas/" target="_blank" style="color:#6600cc;" class="btn btn-link">About Us</a>
+                <a href="https://t.me/joinchat/oHBs2miUisUzNzU9" target="_blank" style="color:#6600cc;" class="btn btn-link">Forum</a>
               </div>    
               
               
@@ -301,11 +299,19 @@
 					<button style="width:90%;position:absolute;left:5%;" class="resetButton" onclick="computeAsWhole()">Compute as Whole</button><br>
 					<p style="color:white;position:absolute;top:50px;padding:12px;font-size:12px;">
 						Paste your text in the text-box and press 'Compute as whole' to check full emotion variance of the paragraph.</br>
-						</br><span id="compErrorMesg" style="color:red; font-size:13px; display:none">Enter valid input</span>
+						</br><span id="compErrorMesg" style="color:red; font-size:12px; display:none">" Enter a valid input."</span>
 						<span id="compProcssMesg" style='font-size:13px; color:white;display:none;
 						animation: animate 1.2s linear infinite;'>&nbsp;Computing...</span>
 					</p>
                 </div>
+              </div>
+            </div>
+			
+			<div class="card card-chart" style="background-color: #27293d; box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.50);">
+              
+              <div class="card-body"  style="height:50px;">
+                <p style="color:#7575a3;font-weight:regular;text-align:center;padding:0px;font-size:13px;">
+					&#169;&nbsp;Copyright - Debparna Biswas</p>
               </div>
             </div>
           </div>
@@ -317,11 +323,11 @@
 		<div class="col-lg-6">
 			<h2 style="padding-top:15px;" class="colorDeptText">App Info</h2>    
                 <div class="chart-area" style="height:170px">
-					<p class="condText">Track your emotions as you type !!</br>
-                    The percentage of each type of emotion of the context is calculated 
-					and updated in the charts as you type. The current prominent emotion 
+					<p style="font-size: 15px;" id="aboutText" class="condText">Track your emotions as you type !!
+                    The % of each type of emotion of the context is calculated 
+					and updated automatically in the charts as you type. Current prominent emotion 
 					is visible in the dashboard header and the mood-color changes accordingly. 
-					Click 'Reset' to start over.
+					Click 'Reset' to start over. Use 'Compute as whole' feature to check full emotion variance of the paragraph.
 				</div>
 		</div>
 		<div class="col-lg-6">
@@ -700,6 +706,7 @@
 			$("#settingsIcon").addClass("fa-1x");
 			$("#sadMob").html("&#128550;&nbsp;");
 			$("#hateMob").html("&#128545;&nbsp;");
+			$("#aboutText").css("font-size","13px");
 		}
 
 		var userTextVar='';
