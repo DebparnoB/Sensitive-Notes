@@ -1,5 +1,7 @@
 # Sensitive-NoteBook
 
+demo : https://www.youtube.com/watch?v=-z-Bq5IWqio
+
 webapp url : https://sensitive-notepad.herokuapp.com/
 
 A responsive web-app containing a text editor which can progressively detect the emotions of the text as the user types, display them in the graphs and changes the mood-color automatically. 
